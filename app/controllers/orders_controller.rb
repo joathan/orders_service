@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
   def show
     order = Order.find(params[:id])
     render json: order
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Order not found' }, status: :not_found
   end
 
   def create
